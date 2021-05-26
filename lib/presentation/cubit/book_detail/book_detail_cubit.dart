@@ -4,6 +4,7 @@ import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/domain/usecases/book_detail/get_random_book.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part 'book_detail_state.dart';
 
@@ -14,6 +15,8 @@ class BookDetailCubit extends Cubit<BookDetailState> {
 
   void getNewRandomBook() async {
     emit(BookDetailLoading());
+    ImageCache imageCache = ImageCache();
+    imageCache.clear();
     final failureOrBook = await getRandomBook();
     emit(_eitherLoadedOrErrorState(failureOrBook));
   }

@@ -1,3 +1,4 @@
+import 'package:clean_books/core/framework/colors.dart';
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/widgets/action_button.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,11 @@ class BookDetail extends StatelessWidget {
         _buildBookImage(size),
         SizedBox(height: 20),
         _buildBookTitle(),
+        SizedBox(height: 5),
         _buildBookAuthor(),
-        SizedBox(height: 20),
+        SizedBox(height: 30),
         _buildActions(),
-        SizedBox(height: 20),
+        SizedBox(height: 30),
         _BottomCard(onPressed: onPressed, book: book),
       ],
     );
@@ -44,6 +46,7 @@ class BookDetail extends StatelessWidget {
     return Text(
       book.data.first.author,
       textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 16, color: Colors.grey),
     );
   }
 
@@ -51,6 +54,7 @@ class BookDetail extends StatelessWidget {
     return Text(
       book.data.first.title,
       textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
 
@@ -83,13 +87,20 @@ class _BottomCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40.0),
         ),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            _buildDescriptionHeader(),
-            SizedBox(height: 20),
-            Text(book.data.first.description),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              _buildDescriptionHeader(),
+              SizedBox(height: 20),
+              Text(
+                book.data.first.description,
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -99,8 +110,55 @@ class _BottomCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Description'),
-        ElevatedButton(onPressed: onPressed, child: Text('Next')),
+        Text(
+          'Description',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        Stack(
+          children: [
+            Positioned(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: buttonBackground,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: secondary,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                        ),
+                        onPressed: onPressed,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: 21,
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundColor: buttonBackground,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.remove_red_eye,
+                            color: Colors.grey,
+                          ),
+                          onPressed: onPressed,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ],
     );
   }

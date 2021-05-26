@@ -1,3 +1,4 @@
+import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/cubit/book_detail/book_detail_cubit.dart';
 import 'package:clean_books/presentation/views/book_detail/book_detail.dart';
 import 'package:clean_books/presentation/widgets/loading_indicator.dart';
@@ -34,7 +35,7 @@ class BookDetailView extends StatelessWidget {
       final book = state.book;
       return BookDetail(
         book: book,
-        onPressed: () => _getRandomBook(context),
+        onPressed: () => _getRandomBook(context, book: book),
       );
     } else if (state is BookDetailError) {
       return Container(
@@ -51,9 +52,17 @@ class BookDetailView extends StatelessWidget {
     }
   }
 
-  void _getRandomBook(BuildContext context) {
-    print('get random book');
+  void _getRandomBook(BuildContext context, {Book? book}) async {
+    if (book != null) {
+      await evictImage(book.data.first.image);
+    }
+
     final bookDetailCubit = context.read<BookDetailCubit>();
     bookDetailCubit.getNewRandomBook();
+  }
+
+  Future<void> evictImage(String imageURL) async {
+    final NetworkImage provider = NetworkImage(imageURL);
+    await provider.evict();
   }
 }
