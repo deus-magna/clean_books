@@ -24,8 +24,8 @@ class BookDetailDesktop extends StatelessWidget {
         _buildBookImage(size),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30),
@@ -86,9 +86,12 @@ class BookDetailDesktop extends StatelessWidget {
         child: Placeholder(),
       );
     } else {
-      return Image(
-        image: NetworkImage(book.data.first.image),
-        height: size.height * 0.33,
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Image(
+          image: NetworkImage(book.data.first.image),
+          height: size.height * 0.33,
+        ),
       );
     }
   }
