@@ -1,10 +1,12 @@
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/cubit/book_detail/book_detail_cubit.dart';
-import 'package:clean_books/presentation/views/book_detail/widgets/book_detail.dart';
+import 'package:clean_books/presentation/views/book_detail/widgets/book_detail_desktop.dart';
+import 'package:clean_books/presentation/views/book_detail/widgets/book_detail_mobile.dart';
 import 'package:clean_books/presentation/widgets/error_message.dart';
 import 'package:clean_books/presentation/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../injection_container.dart';
 
 class BookDetailView extends StatelessWidget {
@@ -34,9 +36,19 @@ class BookDetailView extends StatelessWidget {
       return LoadingIndicator();
     } else if (state is BookDetaiLoaded) {
       final book = state.book;
-      return BookDetail(
-        book: book,
-        onPressed: () => _getRandomBook(context, book: book),
+      return ScreenTypeLayout(
+        mobile: BookDetailMobile(
+          book: book,
+          onPressed: () => _getRandomBook(context, book: book),
+        ),
+        desktop: BookDetailDesktop(
+          book: book,
+          onPressed: () => _getRandomBook(context, book: book),
+        ),
+        tablet: BookDetailDesktop(
+          book: book,
+          onPressed: () => _getRandomBook(context, book: book),
+        ),
       );
     } else if (state is BookDetailError) {
       return ErrorMessage(

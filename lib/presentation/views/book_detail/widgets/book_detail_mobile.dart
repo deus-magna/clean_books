@@ -1,5 +1,6 @@
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/widgets/action_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_card.dart';
@@ -60,12 +61,18 @@ class BookDetailMobile extends StatelessWidget {
   }
 
   Widget _buildBookImage(Size size) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
+    if (kIsWeb) {
+      return Container(
+        margin: const EdgeInsets.all(20),
+        height: size.height * 0.33,
+        width: size.width * 0.5,
+        child: Placeholder(),
+      );
+    } else {
+      return Image(
         image: NetworkImage(book.data.first.image),
         height: size.height * 0.33,
-      ),
-    );
+      );
+    }
   }
 }

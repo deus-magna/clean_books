@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
   final IconData icon;
+  final bool isInverted;
 
   const ActionButton({
     Key? key,
     required this.icon,
+    this.isInverted = false,
   }) : super(key: key);
 
   @override
@@ -15,9 +17,9 @@ class ActionButton extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: Colors.white,
+        color: isInverted ? secondary : Colors.white,
       ),
-      child: Icon(icon, color: secondary),
+      child: Icon(icon, color: isInverted ? Colors.white : secondary),
     );
   }
 }
