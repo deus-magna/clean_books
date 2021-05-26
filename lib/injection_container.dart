@@ -15,23 +15,17 @@ Future<void> init() async {
 Future<void> initBookDetail() async {
   //! Features - BookDetail
   // Cubit
-  sl.registerFactory(() => BookDetailCubit(
-        sl(),
-      ));
+  sl.registerFactory(() => BookDetailCubit(sl()));
 
   // use cases
   sl.registerLazySingleton(() => GetRandomBook(sl()));
 
   // Repository
-  sl.registerLazySingleton<BooksRepository>(() => BooksRepositpryImpl(
-        sl(),
-      ));
+  sl.registerLazySingleton<BooksRepository>(() => BooksRepositpryImpl(sl()));
 
   // Data sources
   sl.registerLazySingleton<BooksRemoteDataSource>(
-      () => BooksRemoteDataSourceImpl(
-            sl(),
-          ));
+      () => BooksRemoteDataSourceImpl(sl()));
 
   //! External
   sl.registerLazySingleton(() => http.Client());
