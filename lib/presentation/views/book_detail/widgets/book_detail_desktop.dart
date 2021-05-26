@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'actions_row.dart';
-import 'bottom_card.dart';
 
 class BookDetailDesktop extends StatelessWidget {
   final Book book;
