@@ -20,10 +20,10 @@ class BookDetaiLoaded extends BookDetailState {
   List<Object> get props => [book];
 }
 
-class BookDetalError extends BookDetailState {
+class BookDetailError extends BookDetailState {
   final String message;
 
-  BookDetalError(this.message);
+  BookDetailError(this.message);
 
   @override
   List<Object> get props => [message];

@@ -21,7 +21,7 @@ class BookdetailCubit extends Cubit<BookDetailState> {
   BookDetailState _eitherLoadedOrErrorState(
       Either<Failure, Book> failureOrPokemonList) {
     return failureOrPokemonList.fold(
-        (failure) => BookDetalError(_mapFailureToMessage(failure)),
+        (failure) => BookDetailError(_mapFailureToMessage(failure)),
         (randomBook) => BookDetaiLoaded(randomBook));
   }
 
