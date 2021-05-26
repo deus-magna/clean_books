@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'bottom_card.dart';
 
-class BookDetail extends StatelessWidget {
+class BookDetailMobile extends StatelessWidget {
   final Book book;
   final VoidCallback onPressed;
 
-  const BookDetail({
+  const BookDetailMobile({
     Key? key,
     required this.book,
     required this.onPressed,
