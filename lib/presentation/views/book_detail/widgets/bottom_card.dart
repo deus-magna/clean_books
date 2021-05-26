@@ -44,7 +44,7 @@ class BottomCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Description',
+          'Descripción',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         ActionsRow(onPressed: onPressed),

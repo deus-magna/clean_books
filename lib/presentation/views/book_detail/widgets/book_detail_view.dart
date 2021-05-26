@@ -39,8 +39,19 @@ class BookDetailView extends StatelessWidget {
       );
     } else if (state is BookDetailError) {
       return Container(
-        child: Center(
-          child: Text(state.message),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              state.message,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+                onPressed: () => _getRandomBook(context),
+                child: Text('Reintentar'))
+          ],
         ),
       );
     } else {
