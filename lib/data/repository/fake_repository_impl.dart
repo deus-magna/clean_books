@@ -5,16 +5,19 @@ import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/domain/repositories/books_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class BooksRepositpryImpl implements BooksRepository {
+class FakeRepositpryImpl implements BooksRepository {
   final BooksRemoteDataSource remoteDataSource;
 
-  BooksRepositpryImpl(this.remoteDataSource);
+  FakeRepositpryImpl(this.remoteDataSource);
 
   @override
   Future<Either<Failure, Book>> getRandomBook() async {
     try {
-      final book = await remoteDataSource.requestRandomBook();
-      return Right(book);
+      await remoteDataSource.requestRandomBook();
+      return Left(
+        ServerFailure(
+            message: 'Ha ocurrido un error al obtener los datos del servidor'),
+      );
     } on ServerException {
       return Left(
         ServerFailure(
