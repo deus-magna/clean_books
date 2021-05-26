@@ -1,10 +1,10 @@
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/cubit/book_detail/book_detail_cubit.dart';
-import 'package:clean_books/presentation/views/book_detail/book_detail.dart';
+import 'package:clean_books/presentation/views/book_detail/widgets/book_detail.dart';
 import 'package:clean_books/presentation/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../injection_container.dart';
+import '../../../../injection_container.dart';
 
 class BookDetailView extends StatelessWidget {
   @override
