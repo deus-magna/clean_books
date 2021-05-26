@@ -1,6 +1,7 @@
 import 'package:clean_books/core/framework/colors.dart';
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/cubit/book_detail/book_detail_cubit.dart';
+import 'package:clean_books/presentation/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../injection_container.dart';
@@ -11,22 +12,10 @@ class BookDetailScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: background,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () => _getRandomBook(context),
-            icon: Icon(
-              Icons.more_vert_outlined,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(context),
       body: BlocProvider(
-        create: (_) => sl<BookdetailCubit>(),
-        child: BlocBuilder<BookdetailCubit, BookDetailState>(
+        create: (_) => sl<BookDetailCubit>(),
+        child: BlocBuilder<BookDetailCubit, BookDetailState>(
           builder: (context, state) {
             if (state is BookdetailInitial) {
               _getRandomBook(context);
@@ -63,9 +52,25 @@ class BookDetailScreen extends StatelessWidget {
     );
   }
 
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(
+          onPressed: () => _getRandomBook(context),
+          icon: Icon(
+            Icons.more_vert_outlined,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
   void _getRandomBook(BuildContext context) {
     print('get random book');
-    final bookDetailCubit = context.read<BookdetailCubit>();
+    final bookDetailCubit = context.read<BookDetailCubit>();
     bookDetailCubit.getNewRandomBook();
   }
 
@@ -124,30 +129,6 @@ class BookDetailScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  final IconData icon;
-
-  const ActionButton({
-    Key? key,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: Colors.white,
-      ),
-      child: Icon(
-        icon,
-        color: secondary,
-      ),
     );
   }
 }

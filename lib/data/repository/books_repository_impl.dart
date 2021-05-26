@@ -1,6 +1,6 @@
 import 'package:clean_books/core/errors/exceptions.dart';
 import 'package:clean_books/core/errors/failure.dart';
-import 'package:clean_books/data/datasources/books_remote_datasource.dart';
+import 'package:clean_books/data/datasources/book_detail/books_remote_datasource.dart';
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/domain/repositories/books_repository.dart';
 import 'package:dartz/dartz.dart';

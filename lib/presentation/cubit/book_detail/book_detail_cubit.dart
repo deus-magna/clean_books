@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:clean_books/core/errors/failure.dart';
 import 'package:clean_books/domain/entities/book.dart';
-import 'package:clean_books/domain/usecases/get_random_book.dart';
+import 'package:clean_books/domain/usecases/book_detail/get_random_book.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 part 'book_detail_state.dart';
 
-class BookdetailCubit extends Cubit<BookDetailState> {
+class BookDetailCubit extends Cubit<BookDetailState> {
   final GetRandomBook getRandomBook;
 
-  BookdetailCubit(this.getRandomBook) : super(BookdetailInitial());
+  BookDetailCubit(this.getRandomBook) : super(BookdetailInitial());
 
   void getNewRandomBook() async {
     emit(BookDetailLoading());
