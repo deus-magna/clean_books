@@ -1,6 +1,7 @@
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/cubit/book_detail/book_detail_cubit.dart';
 import 'package:clean_books/presentation/views/book_detail/widgets/book_detail.dart';
+import 'package:clean_books/presentation/widgets/error_message.dart';
 import 'package:clean_books/presentation/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,21 +39,9 @@ class BookDetailView extends StatelessWidget {
         onPressed: () => _getRandomBook(context, book: book),
       );
     } else if (state is BookDetailError) {
-      return Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              state.message,
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-                onPressed: () => _getRandomBook(context),
-                child: Text('Reintentar'))
-          ],
-        ),
+      return ErrorMessage(
+        message: state.message,
+        onPressed: () => _getRandomBook(context),
       );
     } else {
       return Container(
