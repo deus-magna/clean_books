@@ -1,6 +1,7 @@
 import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/views/book_detail/widgets/actions_row.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class BottomCard extends StatelessWidget {
   const BottomCard({
@@ -40,16 +41,27 @@ class BottomCard extends StatelessWidget {
     );
   }
 
-  Row _buildDescriptionHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Descripción',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        ActionsRow(onPressed: onPressed),
-      ],
-    );
+  Widget _buildDescriptionHeader() {
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      final child = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Descripción',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          ActionsRow(onPressed: onPressed),
+        ],
+      );
+
+      if (sizingInformation.screenSize.width < 320) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: child,
+        );
+      } else {
+        return child;
+      }
+    });
   }
 }

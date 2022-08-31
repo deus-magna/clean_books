@@ -2,6 +2,7 @@ import 'package:clean_books/domain/entities/book.dart';
 import 'package:clean_books/presentation/widgets/action_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'actions_row.dart';
 
@@ -82,7 +83,7 @@ class BookDetailDesktop extends StatelessWidget {
         margin: const EdgeInsets.all(20),
         height: size.height * 0.33,
         width: size.width * 0.5,
-        child: Placeholder(),
+        child: Image(image: AssetImage('assets/img/portada.jpg')),
       );
     } else {
       return Container(
@@ -110,16 +111,36 @@ class BookDetailDesktop extends StatelessWidget {
     );
   }
 
-  Row _buildDescriptionHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Descripción',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        ActionsRow(onPressed: onPressed),
-      ],
-    );
+  Widget _buildDescriptionHeader() {
+    return ResponsiveBuilder(builder: (context, sizingInformation) {
+      if (sizingInformation.screenSize.width < 840) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Descripción',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ActionsRow(onPressed: onPressed),
+              ],
+            ),
+          ],
+        );
+      } else {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Descripción',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            ActionsRow(onPressed: onPressed),
+          ],
+        );
+      }
+    });
   }
 }

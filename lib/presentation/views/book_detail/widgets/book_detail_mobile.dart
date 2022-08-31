@@ -66,7 +66,7 @@ class BookDetailMobile extends StatelessWidget {
         margin: const EdgeInsets.all(20),
         height: size.height * 0.33,
         width: size.width * 0.5,
-        child: Placeholder(),
+        child: Image(image: AssetImage('assets/img/portada.jpg')),
       );
     } else {
       return Image(
